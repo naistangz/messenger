@@ -5,7 +5,7 @@ import boto3
 
 
 def execute(message_body, queue_name, queue_url, sqs):
-    messenger = Messenger(queue_name=queue_name, region_name=utils.AWS_DEFAULT_REGION, sqs_resource=sqs)
+    messenger = Messenger(queue_name=queue_name,sqs_resource=sqs)
     messenger.send_message(message_body)
 
     # Create a MessageConsumer instance and start listening for messages
@@ -15,4 +15,5 @@ def execute(message_body, queue_name, queue_url, sqs):
 
 if __name__ == "__main__":
     sqs = boto3.resource("sqs", region_name=utils.AWS_DEFAULT_REGION)
-    execute({"body": "This is a message"}, utils.QUEUE_NAME, utils.QUEUE_URL, sqs)
+    message = input("Input your message here:\n")
+    execute({"body": message}, utils.QUEUE_NAME, utils.QUEUE_URL, sqs)

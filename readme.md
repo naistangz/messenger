@@ -52,3 +52,43 @@ poetry install
 ```angular2html
 poetry shell
 ```
+
+5. Make sure you have aws credentials
+```angular2html
+export AWS_ACCESS_KEY_ID=<your-access-key>
+export AWS_SECRET_ACCESS_KEY=<your-secret-key>
+```
+Replace <your-access-key> and <your-secret-key> with your actual access and secret keys.
+
+Alternatively, you can also create a credentials file and a config file in your home directory (~/.aws/) and set the 
+AWS_PROFILE environment variable to the name of the profile you want to use.
+
+Example `.aws` profile:
+```angular2html
+[default]
+aws_access_key_id = <your-access-key>
+aws_secret_access_key = <your-secret-key>
+```
+
+6. To run your messenger queue, run the following:
+```angular2html
+python main.py
+```
+
+6. Run the following command to run tests
+```angular2html
+pytest tests
+```
+
+## Next iteration 
+- Dockerize the microservices to build a container image for each microservice 
+  - Include all necessary dependencies and configuration
+  - Create dockerfile for each microservice
+  - Create a docker-compose.yml file to define and run multi-container Docker applications.
+  - Use `localstack` to help us run an SQS container locally for testing purposes
+  - Set environment variables for AWS credentials and region
+  - Define three services:
+    - Messenger microservice
+    - Consumer microservice
+    - AWS SQS container
+
